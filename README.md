@@ -1,14 +1,15 @@
-# api-server #
+# API-server #
 Simple api server for CRUD operation <br>
 ## Technology Used ##
 - Golang
+- Gorilla Mux
 - JWT Authentication
 - Cobra CLI
 ## Running the server ##
 ### Running the server from direct source code ##
 ```git clone git@github.com:pritamdas99/API_server.git``` <br>
 
-Go to the api-server directory and run <br>
+Go to the API-server directory and run <br>
 ```go mod tidy``` <br>
 ```go mod vendor``` <br>
 ```go run . start``` or ```go run . start -p <choosen port>```

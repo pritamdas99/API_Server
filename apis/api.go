@@ -327,8 +327,7 @@ func GetAllUser(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func StartServer(port int) {
-	log.Printf("-------------starting sever at %d -------\n", port)
+func callFunc() {
 	router.HandleFunc("/", Homepage)
 	router.HandleFunc("/addbook", auth.IsAuthenticated(AddBook)).Methods("POST")
 	router.HandleFunc("/addgenre", auth.IsAuthenticated(AddGenre)).Methods("POST")
@@ -346,6 +345,11 @@ func StartServer(port int) {
 	router.HandleFunc("/getallbook", auth.IsAuthenticated(GetAllBook)).Methods("GET")
 	router.HandleFunc("/getallgenre", auth.IsAuthenticated(GetAllGenre)).Methods("GET")
 	router.HandleFunc("/getalluser", GetAllUser).Methods("GET")
+}
+
+func StartServer(port int) {
+	log.Printf("-------------starting sever at %d -------\n", port)
+	callFunc()
 	Server := &http.Server{
 		Addr:    ":" + strconv.Itoa(port),
 		Handler: router,
