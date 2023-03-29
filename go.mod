@@ -1,6 +1,6 @@
 module github.com/PritamDas17021999/API-server
 
-go 1.18
+go 1.20
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
