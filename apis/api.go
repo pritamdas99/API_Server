@@ -343,6 +343,7 @@ func GetAllUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func callFunc() {
+	prometheus.MustRegister(pingCounter)
 	router.HandleFunc("/", Homepage)
 	router.HandleFunc("/ping", Ping)
 	router.Handle("/metrics", promhttp.Handler())

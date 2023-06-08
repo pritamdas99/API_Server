@@ -27,7 +27,8 @@ var (
 )
 
 func init() {
-	startCmd.PersistentFlags().IntVarP(&Port, "port", "p", 8089, "default port for http server")
+	fmt.Println("we are here")
+	startCmd.PersistentFlags().IntVarP(&Port, "port", "p", 8090, "default port for http server")
 	rootCmd.AddCommand(startCmd)
 
 	// Here you will define your flags and configuration settings.
