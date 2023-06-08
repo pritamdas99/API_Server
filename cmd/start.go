@@ -1,6 +1,5 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
@@ -21,14 +20,14 @@ var (
 		Long: `start the server on a default port ,
 				but port can be specify using the port flag`,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("add startserver func here")
+			fmt.Println("add startserver func here at port number: ", Port)
 			apis.StartServer(Port)
 		},
 	}
 )
 
 func init() {
-	startCmd.PersistentFlags().IntVarP(&Port, "port", "p", 8080, "default port for http server")
+	startCmd.PersistentFlags().IntVarP(&Port, "port", "p", 8089, "default port for http server")
 	rootCmd.AddCommand(startCmd)
 
 	// Here you will define your flags and configuration settings.

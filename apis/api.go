@@ -6,16 +6,31 @@ import (
 	"github.com/PritamDas17021999/API-server/auth"
 	"github.com/PritamDas17021999/API-server/data"
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
 )
 
+var pingCounter = prometheus.NewCounter(
+	prometheus.CounterOpts{
+		Name: "ping_request_count",
+		Help: "No of request handled by Ping handler",
+	},
+)
+
 var router = mux.NewRouter()
 
 func Homepage(w http.ResponseWriter, r *http.Request) {
+	//	pingCounter.Inc()
 	fmt.Fprintf(w, "Hello World")
+}
+
+func Ping(w http.ResponseWriter, r *http.Request) {
+	pingCounter.Inc()
+	fmt.Fprintf(w, "pong")
 }
 
 func AddBook(w http.ResponseWriter, r *http.Request) {
@@ -329,6 +344,8 @@ func GetAllUser(w http.ResponseWriter, r *http.Request) {
 
 func callFunc() {
 	router.HandleFunc("/", Homepage)
+	router.HandleFunc("/ping", Ping)
+	router.Handle("/metrics", promhttp.Handler())
 	router.HandleFunc("/addbook", auth.IsAuthenticated(AddBook)).Methods("POST")
 	router.HandleFunc("/addgenre", auth.IsAuthenticated(AddGenre)).Methods("POST")
 	router.HandleFunc("/adduser", AddUser).Methods("POST")
